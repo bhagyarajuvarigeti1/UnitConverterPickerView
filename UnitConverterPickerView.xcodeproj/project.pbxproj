@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04B5B7C428C8FE5D0087EDE2 /* UnitConversionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5B7C328C8FE5D0087EDE2 /* UnitConversionManager.swift */; };
+		04B98C0128CAE5C9002A7A5E /* UnitConversionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B98C0028CAE5C9002A7A5E /* UnitConversionError.swift */; };
 		04FB9FB828C7AD7800C23D2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9FB728C7AD7800C23D2B /* AppDelegate.swift */; };
 		04FB9FBA28C7AD7800C23D2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9FB928C7AD7800C23D2B /* SceneDelegate.swift */; };
 		04FB9FBC28C7AD7800C23D2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9FBB28C7AD7800C23D2B /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		04B5B7C328C8FE5D0087EDE2 /* UnitConversionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConversionManager.swift; sourceTree = "<group>"; };
+		04B98C0028CAE5C9002A7A5E /* UnitConversionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConversionError.swift; sourceTree = "<group>"; };
 		04FB9FB428C7AD7800C23D2B /* UnitConverterPickerView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnitConverterPickerView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04FB9FB728C7AD7800C23D2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04FB9FB928C7AD7800C23D2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				04FB9FC228C7AD7A00C23D2B /* LaunchScreen.storyboard */,
 				04FB9FC528C7AD7A00C23D2B /* Info.plist */,
 				04B5B7C328C8FE5D0087EDE2 /* UnitConversionManager.swift */,
+				04B98C0028CAE5C9002A7A5E /* UnitConversionError.swift */,
 			);
 			path = UnitConverterPickerView;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B98C0128CAE5C9002A7A5E /* UnitConversionError.swift in Sources */,
 				04FB9FBC28C7AD7800C23D2B /* ViewController.swift in Sources */,
 				04FB9FB828C7AD7800C23D2B /* AppDelegate.swift in Sources */,
 				04FB9FBA28C7AD7800C23D2B /* SceneDelegate.swift in Sources */,

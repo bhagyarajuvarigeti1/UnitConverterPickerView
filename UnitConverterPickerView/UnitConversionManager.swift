@@ -8,43 +8,58 @@
 import UIKit
 
 class UnitConversionManager: UIViewController {
-
-    func calculation(unitFrom: String, unitTo: String, val: Double) -> String {
+    
+    func calculation(unitFrom: String, unitTo: String, val: Double) throws -> String {
         print("-===========-")
         print(unitFrom)
         print(unitTo)
         print(val)
         print("-===========-")
         if unitFrom == unitTo {
-            return "Invalid Converstion"
+            return String(val)
         }
-        else if unitFrom == "Celsius" && unitTo == "Fahrenheit" {
+        
+        if unitFrom == "Celsius" && unitTo == "Fahrenheit" {
             let result = round((val * (9/5)) + 32)
             return String(result)
         }
-        else if unitTo == "Celsius" && unitFrom == "Fahrenheit" {
+        
+        if unitFrom == "Fahrenheit" && unitTo == "Celsius"{
             let result = round((val - 32)*5/9)
             return String(result)
         }
-        else if unitFrom == "Foot" && unitTo == "Yard" {
+        
+        if unitFrom == "Foot" && unitTo == "Yard" {
             let result = round(val*3)
             return String(result)
         }
-        else if unitTo == "Foot" && unitFrom == "Yard" {
+        
+        if unitFrom == "Yard" && unitTo == "Foot" {
             let result = round(val/3)
             return String(result)
         }
-        else if unitFrom == "Gallons" && unitTo == "Litres" {
+        
+        if unitFrom == "Gallons" && unitTo == "Litres" {
             let result = round(val*3.78541)
             return String(result)
         }
-        else if unitTo == "Gallons" && unitFrom == "Litres" {
+        
+        if unitFrom == "Litres" && unitTo == "Gallons" {
             let result = round(val/3.78541)
             return String(result)
         }
-        else{
-            return "Wrong !"
-        }
+        
+        throw UnitConversionError.InvalidUnitConversion
     }
+}
 
+class Constants : UIViewController {
+    
+    let quantities = ["Volume", "Length","Temperature"]
+    var selectedQuantity : String = ""
+    
+    let volumeUnits = ["Gallons","Litres"]
+    let lengthUnits = ["Foot","Yard"]
+    let temperatureUnits = ["Celsius","Fahrenheit"]
+    
 }
