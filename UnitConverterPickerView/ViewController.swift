@@ -8,13 +8,8 @@
 import UIKit
 
 class ViewController: UIViewController,  UIPickerViewDelegate,UITextFieldDelegate, UIPickerViewDataSource {
-    let quantities = ["Volume", "Length","Temperature"]
-    var selectedQuantity : String = ""
-
-    let volumeUnits = ["Gallons","Litres"]
-    let lengthUnits = ["Foot","Yard"]
-    let temperatureUnits = ["Celsius","Fahrenheit"]
     
+    let constant = Constants()
     @IBOutlet weak var quantitySelectPickerView: UITextField!
     @IBOutlet weak var fromPickerView: UITextField!
     @IBOutlet weak var toPickerView: UITextField!
@@ -26,44 +21,45 @@ class ViewController: UIViewController,  UIPickerViewDelegate,UITextFieldDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         fromPickerView.tintColor = UIColor.clear
         toPickerView.tintColor = UIColor.clear
         quantitySelectPickerView.tintColor = UIColor.clear
         fromPickerView.isEnabled = false
         toPickerView.isEnabled = false
     }
-
-    @objc(numberOfComponentsInPickerView:) func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView,numberOfRowsInComponent component: Int) -> Int {
         if currentTxtField == quantitySelectPickerView {
-            return quantities.count
+            return constant.quantities.count
         }
         else if currentTxtField == fromPickerView {
-            if selectedQuantity == "Volume" {
-                return volumeUnits.count
+            if constant.selectedQuantity == constant.quantities[0] {
+                return constant.volumeUnits.count
             }
-            else if selectedQuantity == "Length" {
-                return lengthUnits.count
+            else if constant.selectedQuantity == constant.quantities[1] {
+                return constant.lengthUnits.count
             }
-            else if selectedQuantity == "Temperature" {
-                return temperatureUnits.count
+            else if constant.selectedQuantity == constant.quantities[2] {
+                return constant.temperatureUnits.count
             }
             else {
                 return 0
             }
         }
         else if currentTxtField == toPickerView {
-            if selectedQuantity == "Volume" {
-                return volumeUnits.count
+            if constant.selectedQuantity == "Volume" {
+                return constant.volumeUnits.count
             }
-            else if selectedQuantity == "Length" {
-                return lengthUnits.count
+            else if constant.selectedQuantity == "Length" {
+                return constant.lengthUnits.count
             }
-            else if selectedQuantity == "Temperature" {
-                return temperatureUnits.count
+            else if constant.selectedQuantity == "Temperature" {
+                return constant.temperatureUnits.count
             }
             else {
                 return 0
@@ -72,38 +68,39 @@ class ViewController: UIViewController,  UIPickerViewDelegate,UITextFieldDelegat
         else {
             return 0
         }
+        
     }
     
     func pickerView(_ pikcerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         if currentTxtField == quantitySelectPickerView {
-            return quantities[row]
+            return constant.quantities[row]
         }
         else if currentTxtField == fromPickerView {
-            if selectedQuantity == "Volume" {
-                return volumeUnits[row]
+            if constant.selectedQuantity == "Volume" {
+                return constant.volumeUnits[row]
             }
-            else if selectedQuantity == "Length" {
-                return lengthUnits[row]
+            else if constant.selectedQuantity == "Length" {
+                return constant.lengthUnits[row]
             }
-            else if selectedQuantity == "Temperature" {
-                return temperatureUnits[row]
+            else if constant.selectedQuantity == "Temperature" {
+                return constant.temperatureUnits[row]
             }
             else {
                 return ""
             }
         }
         else if currentTxtField == toPickerView {
-            if selectedQuantity == "Volume"
+            if constant.selectedQuantity == "Volume"
             {
-                return volumeUnits[row]
+                return constant.volumeUnits[row]
             }
-            else if selectedQuantity == "Length"
+            else if constant.selectedQuantity == "Length"
             {
-                return lengthUnits[row]
+                return constant.lengthUnits[row]
             }
-            else if selectedQuantity == "Temperature" {
-                return temperatureUnits[row]
+            else if constant.selectedQuantity == "Temperature" {
+                return constant.temperatureUnits[row]
             }
             else {
                 return ""
@@ -116,42 +113,45 @@ class ViewController: UIViewController,  UIPickerViewDelegate,UITextFieldDelegat
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if currentTxtField == quantitySelectPickerView {
-            quantitySelectPickerView.text = quantities[row]
+            quantitySelectPickerView.text = constant.quantities[row]
             fromPickerView.isEnabled = true
             toPickerView.isEnabled = true
-            selectedQuantity = quantities[row]
+            constant.selectedQuantity = constant.quantities[row]
             self.view.endEditing(true)
         }
         else if currentTxtField == fromPickerView {
-            if selectedQuantity == "Volume"
+            if constant.selectedQuantity == "Volume"
             {
-                fromPickerView.text = volumeUnits[row]
+                fromPickerView.text = constant.volumeUnits[row]
                 
             }
-            else if selectedQuantity == "Length"
+            else if constant.selectedQuantity == "Length"
             {
-                fromPickerView.text = lengthUnits[row]
+                fromPickerView.text = constant.lengthUnits[row]
             }
-            else if selectedQuantity == "Temperature"
+            else if constant.selectedQuantity == "Temperature"
             {
-                fromPickerView.text = temperatureUnits[row]
+                fromPickerView.text = constant.temperatureUnits[row]
             }
+            self.view.endEditing(true)
         }
         else if currentTxtField == toPickerView {
-            if selectedQuantity == "Volume"
+            if constant.selectedQuantity == "Volume"
             {
-                toPickerView.text = volumeUnits[row]
+                toPickerView.text = constant.volumeUnits[row]
                 
             }
-            else if selectedQuantity == "Length"
+            else if constant.selectedQuantity == "Length"
             {
-                toPickerView.text = lengthUnits[row]
+                toPickerView.text = constant.lengthUnits[row]
             }
-            else if selectedQuantity == "Temperature"
+            else if constant.selectedQuantity == "Temperature"
             {
-                toPickerView.text = temperatureUnits[row]
+                toPickerView.text = constant.temperatureUnits[row]
             }
+            self.view.endEditing(true)
         }
+        
         
     }
     
@@ -172,8 +172,18 @@ class ViewController: UIViewController,  UIPickerViewDelegate,UITextFieldDelegat
     
     @IBAction func convertBtn(_ sender: Any) {
         let conversionManager = UnitConversionManager()
-        resultTxtView.text = conversionManager.calculation(unitFrom: fromPickerView.text!, unitTo: toPickerView.text!, val: Double(inputTxtView.text!)!)
-        
+        do {
+            guard let tempInputTxtView = inputTxtView.text else {
+                throw UnitConversionError.InvalidUnitConversion
+            }
+            resultTxtView.text = try conversionManager.calculation(unitFrom: fromPickerView.text!, unitTo: toPickerView.text!, value: tempInputTxtView)
+        }
+        catch let error {
+            if let error = error as? UnitConversionError, error == UnitConversionError.InvalidUnitConversion {
+                resultTxtView.text = "Invalid Units are selected"
+            }
+        }
+        fromPickerView.text = ""
+        toPickerView.text = ""
     }
 }
-
