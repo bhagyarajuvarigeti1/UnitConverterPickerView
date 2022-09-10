@@ -10,13 +10,6 @@ import UIKit
 class ViewController: UIViewController,  UIPickerViewDelegate,UITextFieldDelegate, UIPickerViewDataSource {
     
     let constant = Constants()
-    
-//    let quantities = ["Volume", "Length","Temperature"]
-//    var selectedQuantity : String = ""
-//
-//    let volumeUnits = ["Gallons","Litres"]
-//    let lengthUnits = ["Foot","Yard"]
-//    let temperatureUnits = ["Celsius","Fahrenheit"]
     @IBOutlet weak var quantitySelectPickerView: UITextField!
     @IBOutlet weak var fromPickerView: UITextField!
     @IBOutlet weak var toPickerView: UITextField!
@@ -75,7 +68,7 @@ class ViewController: UIViewController,  UIPickerViewDelegate,UITextFieldDelegat
         else {
             return 0
         }
-
+        
     }
     
     func pickerView(_ pikcerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
