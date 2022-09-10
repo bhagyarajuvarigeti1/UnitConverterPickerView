@@ -28,6 +28,7 @@ class ViewController: UIViewController,  UIPickerViewDelegate,UITextFieldDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         fromPickerView.tintColor = UIColor.clear
         toPickerView.tintColor = UIColor.clear
         quantitySelectPickerView.tintColor = UIColor.clear
@@ -35,7 +36,7 @@ class ViewController: UIViewController,  UIPickerViewDelegate,UITextFieldDelegat
         toPickerView.isEnabled = false
     }
     
-    @objc(numberOfComponentsInPickerView:) func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
@@ -74,6 +75,7 @@ class ViewController: UIViewController,  UIPickerViewDelegate,UITextFieldDelegat
         else {
             return 0
         }
+
     }
     
     func pickerView(_ pikcerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -138,6 +140,7 @@ class ViewController: UIViewController,  UIPickerViewDelegate,UITextFieldDelegat
             {
                 fromPickerView.text = constant.temperatureUnits[row]
             }
+            self.view.endEditing(true)
         }
         else if currentTxtField == toPickerView {
             if constant.selectedQuantity == "Volume"
@@ -153,7 +156,9 @@ class ViewController: UIViewController,  UIPickerViewDelegate,UITextFieldDelegat
             {
                 toPickerView.text = constant.temperatureUnits[row]
             }
+            self.view.endEditing(true)
         }
+        
         
     }
     
@@ -175,12 +180,17 @@ class ViewController: UIViewController,  UIPickerViewDelegate,UITextFieldDelegat
     @IBAction func convertBtn(_ sender: Any) {
         let conversionManager = UnitConversionManager()
         do {
-            resultTxtView.text = try conversionManager.calculation(unitFrom: fromPickerView.text!, unitTo: toPickerView.text!, val: Double(inputTxtView.text!)!)
+            guard let tempInputTxtView = inputTxtView.text else {
+                throw UnitConversionError.InvalidUnitConversion
+            }
+            resultTxtView.text = try conversionManager.calculation(unitFrom: fromPickerView.text!, unitTo: toPickerView.text!, value: tempInputTxtView)
         }
         catch let error {
             if let error = error as? UnitConversionError, error == UnitConversionError.InvalidUnitConversion {
                 resultTxtView.text = "Invalid Units are selected"
             }
         }
+        fromPickerView.text = ""
+        toPickerView.text = ""
     }
 }

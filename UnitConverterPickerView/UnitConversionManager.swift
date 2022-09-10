@@ -9,43 +9,44 @@ import UIKit
 
 class UnitConversionManager: UIViewController {
     
-    func calculation(unitFrom: String, unitTo: String, val: Double) throws -> String {
+    func calculation(unitFrom: String, unitTo: String, value: String) throws -> String {
         print("-===========-")
         print(unitFrom)
         print(unitTo)
-        print(val)
+        print(value)
         print("-===========-")
+        let val = Double(value)
         if unitFrom == unitTo {
-            return String(val)
+            return value
         }
         
         if unitFrom == "Celsius" && unitTo == "Fahrenheit" {
-            let result = round((val * (9/5)) + 32)
+            let result = round((val! * (9/5)) + 32)
             return String(result)
         }
         
         if unitFrom == "Fahrenheit" && unitTo == "Celsius"{
-            let result = round((val - 32)*5/9)
+            let result = round((val! - 32)*5/9)
             return String(result)
         }
         
         if unitFrom == "Foot" && unitTo == "Yard" {
-            let result = round(val*3)
+            let result = round(val! * 3)
             return String(result)
         }
         
         if unitFrom == "Yard" && unitTo == "Foot" {
-            let result = round(val/3)
+            let result = round(val!/3)
             return String(result)
         }
         
         if unitFrom == "Gallons" && unitTo == "Litres" {
-            let result = round(val*3.78541)
+            let result = round(val!*3.78541)
             return String(result)
         }
         
         if unitFrom == "Litres" && unitTo == "Gallons" {
-            let result = round(val/3.78541)
+            let result = round(val!/3.78541)
             return String(result)
         }
         
